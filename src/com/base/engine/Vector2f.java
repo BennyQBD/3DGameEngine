@@ -100,7 +100,7 @@ public class Vector2f
 		return y;
 	}
 
-	public void setY(float y) 
+	public void setY(float y)
 	{
 		this.y = y;
 	}

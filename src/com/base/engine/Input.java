@@ -10,51 +10,22 @@ public class Input
 	public static final int NUM_KEYCODES = 256;
 	public static final int NUM_MOUSEBUTTONS = 5;
 	
-	private static ArrayList<Integer> currentKeys = new ArrayList<Integer>();
-	private static ArrayList<Integer> downKeys = new ArrayList<Integer>();
-	private static ArrayList<Integer> upKeys = new ArrayList<Integer>();
-	
-	private static ArrayList<Integer> currentMouse = new ArrayList<Integer>();
-	private static ArrayList<Integer> downMouse = new ArrayList<Integer>();
-	private static ArrayList<Integer> upMouse = new ArrayList<Integer>();
+	private static ArrayList<Integer> lastKeys = new ArrayList<Integer>();
+	private static ArrayList<Integer> lastMouse = new ArrayList<Integer>();
 	
 	public static void update()
 	{
-		upMouse.clear();
-		
-		for(int i = 0; i < NUM_MOUSEBUTTONS; i++)
-			if(!getMouse(i) && currentMouse.contains(i))
-				upMouse.add(i);
-		
-		downMouse.clear();
-		
-		for(int i = 0; i < NUM_MOUSEBUTTONS; i++)
-			if(getMouse(i) && !currentMouse.contains(i))
-				downMouse.add(i);
-		
-		upKeys.clear();
-		
-		for(int i = 0; i < NUM_KEYCODES; i++)
-			if(!getKey(i) && currentKeys.contains(i))
-				upKeys.add(i);
-		
-		downKeys.clear();
-		
-		for(int i = 0; i < NUM_KEYCODES; i++)
-			if(getKey(i) && !currentKeys.contains(i))
-				downKeys.add(i);
-		
-		currentKeys.clear();
+		lastKeys.clear();
 		
 		for(int i = 0; i < NUM_KEYCODES; i++)
 			if(getKey(i))
-				currentKeys.add(i);
+				lastKeys.add(i);
 		
-		currentMouse.clear();
+		lastMouse.clear();
 		
 		for(int i = 0; i < NUM_MOUSEBUTTONS; i++)
 			if(getMouse(i))
-				currentMouse.add(i);
+				lastMouse.add(i);
 	}
 	
 	public static boolean getKey(int keyCode)
@@ -64,12 +35,12 @@ public class Input
 	
 	public static boolean getKeyDown(int keyCode)
 	{
-		return downKeys.contains(keyCode);
+		return getKey(keyCode) && !lastKeys.contains(keyCode);
 	}
 	
 	public static boolean getKeyUp(int keyCode)
 	{
-		return upKeys.contains(keyCode);
+		return !getKey(keyCode) && lastKeys.contains(keyCode);
 	}
 	
 	public static boolean getMouse(int mouseButton)
@@ -79,12 +50,12 @@ public class Input
 	
 	public static boolean getMouseDown(int mouseButton)
 	{
-		return downMouse.contains(mouseButton);
+		return getMouse(mouseButton) && !lastMouse.contains(mouseButton);
 	}
 	
 	public static boolean getMouseUp(int mouseButton)
 	{
-		return upMouse.contains(mouseButton);
+		return !getMouse(mouseButton) && lastMouse.contains(mouseButton);
 	}
 	
 	public static Vector2f getMousePosition()

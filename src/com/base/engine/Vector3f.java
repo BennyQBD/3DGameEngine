@@ -88,27 +88,33 @@ public class Vector3f
 		return new Vector3f(x / r, y / r, z / r);
 	}
 	
-	public float getX() {
+	public float getX() 
+	{
 		return x;
 	}
 
-	public void setX(float x) {
+	public void setX(float x) 
+	{
 		this.x = x;
 	}
 
-	public float getY() {
+	public float getY() 
+	{
 		return y;
 	}
 
-	public void setY(float y) {
+	public void setY(float y) 
+	{
 		this.y = y;
 	}
 
-	public float getZ() {
+	public float getZ() 
+	{
 		return z;
 	}
 
-	public void setZ(float z) {
+	public void setZ(float z) 
+	{
 		this.z = z;
 	}
 }
