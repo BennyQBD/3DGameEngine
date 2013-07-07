@@ -1,7 +1,41 @@
 package com.base.engine;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE10;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE11;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE12;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE13;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE14;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE15;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE16;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE17;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE18;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE19;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE2;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE20;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE21;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE22;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE23;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE24;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE25;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE26;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE27;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE28;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE29;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE3;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE30;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE31;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE4;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE5;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE6;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE7;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE8;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE9;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL32.GL_DEPTH_CLAMP;
 
 public class RenderUtil
 {
@@ -9,6 +43,14 @@ public class RenderUtil
 	{
 		//TODO: Stencil Buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+
+	public static void setTextures(boolean enabled)
+	{
+		if(enabled)
+			glEnable(GL_TEXTURE_2D);
+		else
+			glDisable(GL_TEXTURE_2D);
 	}
 	
 	public static void initGraphics()
@@ -22,6 +64,7 @@ public class RenderUtil
 		
 		//TODO: Depth clamp for later
 		
+		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_FRAMEBUFFER_SRGB);
 	}
 	
