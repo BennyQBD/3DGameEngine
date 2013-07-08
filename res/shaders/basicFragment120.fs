@@ -1,8 +1,16 @@
 #version 120
 
-varying vec4 color;
+varying vec2 texCoord0;
+
+uniform vec3 color;
+uniform sampler2D sampler;
 
 void main()
 {
-    gl_FragColor = color;
+    vec4 textureColor = texture2D(sampler, texCoord0.xy);
+
+    if(textureColor == 0)
+        gl_FragColor = vec4(color, 1);
+    else
+        gl_FragColor = textureColor * vec4(color, 1);
 }
