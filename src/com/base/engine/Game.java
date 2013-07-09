@@ -9,7 +9,7 @@ public class Game
 	
 	public Game()
 	{
-		mesh = ResourceLoader.loadMesh("mayaBox.obj");
+		mesh = ResourceLoader.loadMesh("box.obj");
 		material = new Material(ResourceLoader.loadTexture("test.png"), new Vector3f(0,1,1));
 		shader = BasicShader.getInstance();
 		camera = new Camera();
