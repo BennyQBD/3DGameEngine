@@ -102,6 +102,11 @@ public class Vector3f
 		return new Vector3f(Math.abs(x), Math.abs(y), Math.abs(z));
 	}
 	
+	public String toString()
+	{
+		return "(" + x + " " + y + " " + z + ")";
+	}
+	
 	public float getX() 
 	{
 		return x;
