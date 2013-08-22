@@ -7,8 +7,11 @@ public class Game
 	private Transform transform;
 	private Camera camera;
 	
-	PointLight pLight1 = new PointLight(new BaseLight(new Vector3f(1,0.5f,0), 0.8f), new Attenuation(0,0,1), new Vector3f(-2,0,5f));
-	PointLight pLight2 = new PointLight(new BaseLight(new Vector3f(0,0.5f,1), 0.8f), new Attenuation(0,0,1), new Vector3f(2,0,7f));
+	PointLight pLight1 = new PointLight(new BaseLight(new Vector3f(1,0.5f,0), 0.8f), new Attenuation(0,0,1), new Vector3f(-2,0,5f), 10);
+	PointLight pLight2 = new PointLight(new BaseLight(new Vector3f(0,0.5f,1), 0.8f), new Attenuation(0,0,1), new Vector3f(2,0,7f), 10);
+	
+	SpotLight sLight1 = new SpotLight(new PointLight(new BaseLight(new Vector3f(0,1f,1f), 0.8f), new Attenuation(0,0,0.1f), new Vector3f(-2,0,5f), 30),
+									  new Vector3f(1,1,1), 0.7f);
 	
 	public Game()
 	{
@@ -57,7 +60,8 @@ public class Game
 		PhongShader.setAmbientLight(new Vector3f(0.1f,0.1f,0.1f));
 		//PhongShader.setDirectionalLight(new DirectionalLight(new BaseLight(new Vector3f(1,1,1), 0.8f), new Vector3f(1,1,1)));
 	
-		PhongShader.setPointLight(new PointLight[]{pLight1, pLight2});
+		//PhongShader.setPointLight(new PointLight[]{pLight1, pLight2});
+		PhongShader.setSpotLights(new SpotLight[]{sLight1});
 	}
 	
 	public void input()
@@ -67,7 +71,7 @@ public class Game
 //		if(Input.getKeyDown(Input.KEY_UP))
 //			System.out.println("We've just pressed up!");
 //		if(Input.getKeyUp(Input.KEY_UP))
-//			System.out.println("We've just released up!");
+//			System.out.println("We've just released up!");sd
 //		
 //		if(Input.getMouseDown(1))
 //			System.out.println("We've just right clicked at " + Input.getMousePosition().toString());
@@ -90,6 +94,8 @@ public class Game
 		pLight2.setPosition(new Vector3f(7,0,8.0f * (float)(Math.cos(temp) + 1.0/2.0) + 10));
 		
 		//transform.setScale(0.7f * sinTemp, 0.7f * sinTemp, 0.7f * sinTemp);
+		sLight1.getPointLight().setPosition(camera.getPos());
+		sLight1.setDirection(camera.getForward());
 	}
 	
 	public void render()
