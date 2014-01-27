@@ -1,4 +1,6 @@
-package com.base.engine;
+package com.base.engine.core;
+
+import com.base.engine.rendering.Camera;
 
 public class Transform
 {

@@ -1,9 +1,10 @@
-package com.base.engine;
+package com.base.engine.core;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 
+import com.base.engine.rendering.Vertex;
 import org.lwjgl.BufferUtils;
 
 public class Util

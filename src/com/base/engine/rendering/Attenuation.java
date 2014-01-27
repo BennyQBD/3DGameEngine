@@ -1,4 +1,4 @@
-package com.base.engine;
+package com.base.engine.rendering;
 
 public class Attenuation
 {
