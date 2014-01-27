@@ -83,15 +83,16 @@ public class MainComponent
 			if(render)
 			{
 				render();
+				//System.out.println(1000 * (double)(Time.getTime() - startTime)/((double)Time.SECOND) + "ms");
 				frames++;
 			}
 			else
 			{
-				try 
+				try
 				{
 					Thread.sleep(1);
-				} 
-				catch (InterruptedException e) 
+				}
+				catch (InterruptedException e)
 				{
 					e.printStackTrace();
 				}
@@ -104,8 +105,12 @@ public class MainComponent
 	private void render()
 	{
 		RenderUtil.clearScreen();
+		//long startTime = Time.getTime();
 		game.render();
+		//double millisecond = 1000 * (double)(Time.getTime() - startTime)/((double)Time.SECOND);
+		//System.out.println(millisecond + "ms (" + (int)(1.0/(millisecond / 1000)) + " fps)");
 		Window.render();
+
 	}
 	
 	private void cleanUp()

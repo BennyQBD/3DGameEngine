@@ -13,8 +13,8 @@ public class BasicShader extends Shader
 	{
 		super();
 		
-		addVertexShaderFromFile("basicVertex.vs");
-		addFragmentShaderFromFile("basicFragment.fs");
+		addVertexShaderFromFile("basicVertex120.vs");
+		addFragmentShaderFromFile("basicFragment120.fs");
 		compileShader();
 		
 		addUniform("transform");

@@ -82,7 +82,7 @@ public class Shader
 	{
 		glLinkProgram(program);
 		
-		if(glGetProgram(program, GL_LINK_STATUS) == 0)
+		if(glGetProgrami(program, GL_LINK_STATUS) == 0)
 		{
 			System.err.println(glGetProgramInfoLog(program, 1024));
 			System.exit(1);
@@ -90,7 +90,7 @@ public class Shader
 		
 		glValidateProgram(program);
 		
-		if(glGetProgram(program, GL_VALIDATE_STATUS) == 0)
+		if(glGetProgrami(program, GL_VALIDATE_STATUS) == 0)
 		{
 			System.err.println(glGetProgramInfoLog(program, 1024));
 			System.exit(1);
@@ -110,7 +110,7 @@ public class Shader
 		glShaderSource(shader, text);
 		glCompileShader(shader);
 		
-		if(glGetShader(shader, GL_COMPILE_STATUS) == 0)
+		if(glGetShaderi(shader, GL_COMPILE_STATUS) == 0)
 		{
 			System.err.println(glGetShaderInfoLog(shader, 1024));
 			System.exit(1);
