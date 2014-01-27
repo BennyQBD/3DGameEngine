@@ -1,6 +1,5 @@
 package com.base.engine.core;
 
-import com.base.game.Game;
 import com.base.engine.rendering.RenderUtil;
 import com.base.engine.rendering.Window;
 

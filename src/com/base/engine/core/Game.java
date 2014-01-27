@@ -1,4 +1,4 @@
-package com.base.game;
+package com.base.engine.core;
 
 public interface Game
 {
