@@ -1,35 +1,36 @@
 BIG TOPICS:
--Rendering Engine
++Rendering Engine
 -Physics Engine
 
 Other topics:
--Some way to insert game into engine
--Better scratchpad support
++Some way to insert game into engine
++Better scratchpad support
 -Better textures (reading, blitting, basic image processing)
--Some way to separate game and engine data
--Add higher level rendering constructs (Shaders, Materials, Meshes, Transforms)
--Add some form of automatic shader selection
++Some way to separate game and engine data
++Add higher level rendering constructs (Shaders, Materials, Meshes, Transforms)
++Add some form of automatic shader selection
 -Add some form of primitives (Rectangles, Spheres)
--More flexible transform class (default values for projection and camera)
--Non-perspective views, (orthogonal views)
++More flexible transform class (default values for projection and camera)
+=Non-perspective views, (orthogonal views)
 -Texture manipulation (Translation, rotation, scale)
 -More Control over textures (Filtering, Formatting)
--More friendly constructors
--Window should have more properties (Center position, fullscreen, maybe mouse locking)
++More friendly constructors
+=Window should have more properties (Center position, fullscreen, maybe mouse locking)
 -Better vector math (normalization, +=, Commonly used Vector constants, Swizzling support)
 -Options class/system, some place to read values that the player chooses
--Centralized "level" or "scene" class that holds the data the game is using
--Game object class
--Make all positioning names "position"
--Make naming more consistent
--Vector swizzling
--Make all time based on seconds rather than nanoseconds
++Centralized "level" or "scene" class that holds the data the game is using
++Game object class
++Make all positioning names "position"
++Make naming more consistent
++Vector swizzling
++Make all time based on seconds rather than nanoseconds
++Change the way delta is passed
 -Give vectors a copy constructor
--Give vectors an interpolation method
++Give vectors an interpolation method
 -Transparency Support
 -Sprite Support
--Good way to compare vectors
--Vector2f cross product
++Good way to compare vectors
++Vector2f cross product
 -Some way to display text
 
 -Eventually, make easier way to generate mesh

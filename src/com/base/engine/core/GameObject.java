@@ -27,22 +27,22 @@ public class GameObject
 		components.add(component);
 	}
 
-	public void input()
+	public void input(float delta)
 	{
 		for(GameComponent component : components)
-			component.input(transform);
+			component.input(transform, delta);
 
 		for(GameObject child : children)
-			child.input();
+			child.input(delta);
 	}
 
-	public void update()
+	public void update(float delta)
 	{
 		for(GameComponent component : components)
-			component.update(transform);
+			component.update(transform, delta);
 
 		for(GameObject child : children)
-			child.update();
+			child.update(delta);
 	}
 
 	public void render(Shader shader)
