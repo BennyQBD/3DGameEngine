@@ -26,7 +26,7 @@ public class RenderingEngine
 
 		glEnable(GL_TEXTURE_2D);
 
-		mainCamera = new Camera((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getWidth(), 0.01f, 1000.0f);
+		mainCamera = new Camera((float)Math.toRadians(70.0f), (float)Window.getWidth()/(float)Window.getHeight(), 0.01f, 1000.0f);
 	}
 
 	public void input(float delta)
