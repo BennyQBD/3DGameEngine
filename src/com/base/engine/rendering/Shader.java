@@ -80,7 +80,12 @@ public class Shader
 	{
 		addProgram(text, GL_FRAGMENT_SHADER);
 	}
-	
+
+	public void setAttribLocation(String attributeName, int location)
+	{
+		glBindAttribLocation(program, location, attributeName);
+	}
+
 	public void compileShader()
 	{
 		glLinkProgram(program);
@@ -99,7 +104,7 @@ public class Shader
 			System.exit(1);
 		}
 	}
-	
+
 	private void addProgram(String text, int type)
 	{
 		int shader = glCreateShader(type);
