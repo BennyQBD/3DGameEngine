@@ -3,7 +3,6 @@ package com.base.engine.rendering;
 import com.base.engine.components.BaseLight;
 import com.base.engine.core.GameObject;
 import com.base.engine.core.Vector3f;
-import com.base.engine.rendering.*;
 
 import java.util.ArrayList;
 
