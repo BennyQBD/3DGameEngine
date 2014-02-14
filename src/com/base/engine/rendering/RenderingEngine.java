@@ -1,7 +1,8 @@
-package com.base.engine.core;
+package com.base.engine.rendering;
 
-import com.base.engine.components.DirectionalLight;
-import com.base.engine.components.PointLight;
+import com.base.engine.components.BaseLight;
+import com.base.engine.core.GameObject;
+import com.base.engine.core.Vector3f;
 import com.base.engine.rendering.*;
 
 import java.util.ArrayList;
@@ -14,20 +15,14 @@ public class RenderingEngine
 {
 	private Camera mainCamera;
 	private Vector3f ambientLight;
-	private DirectionalLight activeDirectionalLight;
-	private PointLight activePointLight;
-	private SpotLight spotLight;
-//
-//	private PointLight[] pointLightList;
 
-	//"Permanent" Structures
-	private ArrayList<DirectionalLight> directionalLights;
-	private ArrayList<PointLight> pointLights;
+	//"More Permanent" Structure
+	private ArrayList<BaseLight> lights;
+	private BaseLight activeLight;
 
 	public RenderingEngine()
 	{
-		directionalLights = new ArrayList<DirectionalLight>();
-		pointLights = new ArrayList<PointLight>();
+		lights = new ArrayList<BaseLight>();
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		glFrontFace(GL_CW);
@@ -78,21 +73,6 @@ public class RenderingEngine
 		return ambientLight;
 	}
 
-	public DirectionalLight getActiveDirectionalLight()
-	{
-		return activeDirectionalLight;
-	}
-
-	public PointLight getActivePointLight()
-	{
-		return activePointLight;
-	}
-
-	public SpotLight getSpotLight()
-	{
-		return spotLight;
-	}
-
 	public void input(float delta)
 	{
 		mainCamera.input(delta);
@@ -102,17 +82,11 @@ public class RenderingEngine
 	{
 		clearScreen();
 
-		clearLightList();
+		lights.clear();
 		object.addToRenderingEngine(this);
 
 		Shader forwardAmbient = ForwardAmbient.getInstance();
-		Shader forwardPoint = ForwardPoint.getInstance();
-		Shader forwardSpot = ForwardSpot.getInstance();
-		Shader forwardDirectional = ForwardDirectional.getInstance();
 		forwardAmbient.setRenderingEngine(this);
-		forwardDirectional.setRenderingEngine(this);
-		forwardPoint.setRenderingEngine(this);
-		forwardSpot.setRenderingEngine(this);
 
 		object.render(forwardAmbient);
 
@@ -121,27 +95,16 @@ public class RenderingEngine
 		glDepthMask(false);
 		glDepthFunc(GL_EQUAL);
 
-		for(DirectionalLight light : directionalLights)
+		for(BaseLight light : lights)
 		{
-			activeDirectionalLight = light;
-			object.render(forwardDirectional);
-		}
-
-		for(PointLight light : pointLights)
-		{
-			activePointLight = light;
-			object.render(forwardPoint);
+			light.getShader().setRenderingEngine(this);
+			activeLight = light;
+			object.render(light.getShader());
 		}
 
 		glDepthFunc(GL_LESS);
 		glDepthMask(true);
 		glDisable(GL_BLEND);
-	}
-
-	private void clearLightList()
-	{
-		directionalLights.clear();
-		pointLights.clear();
 	}
 
 	private static void clearScreen()
@@ -173,14 +136,14 @@ public class RenderingEngine
 		return glGetString(GL_VERSION);
 	}
 
-	public void addDirectionalLight(DirectionalLight directionalLight)
+	public void addLight(BaseLight light)
 	{
-		directionalLights.add(directionalLight);
+		lights.add(light);
 	}
 
-	public void addPointLight(PointLight pointLight)
+	public BaseLight getActiveLight()
 	{
-		pointLights.add(pointLight);
+		return activeLight;
 	}
 
 	public Camera getMainCamera()
