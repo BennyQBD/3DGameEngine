@@ -1,5 +1,6 @@
 package com.base.engine.rendering;
 
+import com.base.engine.components.PointLight;
 import com.base.engine.core.Matrix4f;
 import com.base.engine.core.Transform;
 
