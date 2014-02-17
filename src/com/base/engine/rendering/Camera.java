@@ -80,7 +80,7 @@ public class Camera
 //		if(Input.getKey(Input.KEY_LEFT))
 //			rotateY(-rotAmt);
 //		if(Input.getKey(Input.KEY_RIGHT))
-//			rotateY(rotAmt);
+//		 	rotateY(rotAmt);
 	}
 	
 	public void move(Vector3f dir, float amt)
