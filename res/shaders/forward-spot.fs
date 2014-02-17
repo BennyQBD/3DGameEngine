@@ -105,6 +105,6 @@ vec4 calcSpotLight(SpotLight spotLight, vec3 normal)
 
 void main()
 {
-	//gl_FragColor = texture2D(diffuse, texCoord0.xy) * calcPointLight(spotLight.pointLight, normalize(normal0));
+	//gl_FragColor = texture2D(diffuse, texCoord0.xy) * calcPointLight(spotLight.pointLight, normalized(normal0));
     gl_FragColor = texture2D(diffuse, texCoord0.xy) * calcSpotLight(spotLight, normalize(normal0));
 }
