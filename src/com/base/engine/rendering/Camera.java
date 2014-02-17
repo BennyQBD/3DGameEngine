@@ -65,9 +65,9 @@ public class Camera
 			boolean rotX = deltaPos.getY() != 0;
 			
 			if(rotY)
-				rotateY(deltaPos.getX() * sensitivity);
+				rotateY((float)Math.toRadians(deltaPos.getX() * sensitivity));
 			if(rotX)
-				rotateX(-deltaPos.getY() * sensitivity);
+				rotateX((float)Math.toRadians(-deltaPos.getY() * sensitivity));
 				
 			if(rotY || rotX)
 				Input.setMousePosition(new Vector2f(Window.getWidth()/2, Window.getHeight()/2));
@@ -91,18 +91,18 @@ public class Camera
 	public void rotateY(float angle)
 	{
 		Vector3f Haxis = yAxis.cross(forward).normalized();
-		
+
 		forward = forward.rotate(angle, yAxis).normalized();
-		
+
 		up = forward.cross(Haxis).normalized();
 	}
-	
+
 	public void rotateX(float angle)
 	{
 		Vector3f Haxis = yAxis.cross(forward).normalized();
-		
+
 		forward = forward.rotate(angle, Haxis).normalized();
-		
+
 		up = forward.cross(Haxis).normalized();
 	}
 	
