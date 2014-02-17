@@ -126,7 +126,8 @@ public class Vector3f
 	public Vector2f getZY() { return new Vector2f(z, y); }
 	public Vector2f getXZ() { return new Vector2f(x, z); }
 
-	public void set(float x, float y, float z) { this.x = x; this.y = y; this.z = z; }
+	public Vector3f set(float x, float y, float z) { this.x = x; this.y = y; this.z = z; return this; }
+	public Vector3f set(Vector3f r) { set(r.getX(), r.getY(), r.getZ()); return this; }
 
 	public float getX() 
 	{
