@@ -7,6 +7,7 @@ import com.base.engine.core.Vector3f;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OBJModel
 {
@@ -77,6 +78,62 @@ public class OBJModel
 		}
 	}
 
+	public IndexedModel toIndexedModel()
+	{
+		IndexedModel result = new IndexedModel();
+		HashMap<Integer, Integer> indexMap = new HashMap<Integer, Integer>();
+
+		int currentVertexIndex = 0;
+		for(int i = 0; i < indices.size(); i++)
+		{
+			OBJIndex currentIndex = indices.get(i);
+
+			Vector3f currentPosition = positions.get(currentIndex.vertexIndex);
+			Vector2f currentTexCoord;
+			Vector3f currentNormal;
+
+			if(hasTexCoords)
+				currentTexCoord = texCoords.get(currentIndex.texCoordIndex);
+			else
+				currentTexCoord = new Vector2f(0,0);
+
+			if(hasNormals)
+				currentNormal = normals.get(currentIndex.normalIndex);
+			else
+				currentNormal = new Vector3f(0,0,0);
+
+			int previousVertexIndex = -1;
+
+			for(int j = 0; j < i; j++)
+			{
+				OBJIndex oldIndex = indices.get(j);
+
+				if(currentIndex.vertexIndex == oldIndex.vertexIndex
+					&& currentIndex.texCoordIndex == oldIndex.texCoordIndex
+					&& currentIndex.normalIndex == oldIndex.normalIndex)
+				{
+					previousVertexIndex = j;
+					break;
+				}
+			}
+
+			if(previousVertexIndex == -1)
+			{
+				indexMap.put(i, currentVertexIndex);
+
+				result.getPositions().add(currentPosition);
+				result.getTexCoords().add(currentTexCoord);
+				result.getNormals().add(currentNormal);
+				result.getIndices().add(currentVertexIndex);
+				currentVertexIndex++;
+			}
+			else
+				result.getIndices().add(indexMap.get(previousVertexIndex));
+		}
+
+		return result;
+	}
+
 	private OBJIndex parseOBJIndex(String token)
 	{
 		String[] values = token.split("/");
@@ -99,8 +156,8 @@ public class OBJModel
 		return result;
 	}
 
-	public ArrayList<Vector3f> getPositions() { return positions; }
-	public ArrayList<Vector2f> getTexCoords() { return texCoords; }
-	public ArrayList<Vector3f> getNormals() { return normals; }
-	public ArrayList<OBJIndex> getIndices() { return indices; }
+//	public ArrayList<Vector3f> getPositions() { return positions; }
+//	public ArrayList<Vector2f> getTexCoords() { return texCoords; }
+//	public ArrayList<Vector3f> getNormals() { return normals; }
+//	public ArrayList<OBJIndex> getIndices() { return indices; }
 }
