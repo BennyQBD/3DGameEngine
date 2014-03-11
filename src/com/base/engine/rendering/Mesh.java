@@ -2,6 +2,7 @@ package com.base.engine.rendering;
 
 import com.base.engine.core.Util;
 import com.base.engine.core.Vector3f;
+import com.base.engine.rendering.meshLoading.OBJModel;
 import org.lwjgl.opengl.GL15;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -103,7 +104,9 @@ public class Mesh
 	{
 		String[] splitArray = fileName.split("\\.");
 		String ext = splitArray[splitArray.length - 1];
-		
+
+		OBJModel test = new OBJModel("./res/models/" + fileName);
+
 		if(!ext.equals("obj"))
 		{
 			System.err.println("Error: File format not supported for mesh data: " + ext);
