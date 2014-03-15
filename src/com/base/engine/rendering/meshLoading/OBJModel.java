@@ -184,6 +184,32 @@ public class OBJModel
 			}
 			else
 				result.getIndices().add(indexMap.get(previousVertexIndex));
+
+//			for(int j = 0; j < i; j++)
+//			{
+//				OBJIndex oldIndex = indices.get(j);
+//
+//				if(currentIndex.vertexIndex == oldIndex.vertexIndex
+//					&& currentIndex.texCoordIndex == oldIndex.texCoordIndex
+//					&& currentIndex.normalIndex == oldIndex.normalIndex)
+//				{
+//					previousVertexIndex = j;
+//					break;
+//				}
+//			}
+//
+//			if(previousVertexIndex == -1)
+//			{
+//				indexMap.put(i, currentVertexIndex);
+//
+//				result.getPositions().add(currentPosition);
+//				result.getTexCoords().add(currentTexCoord);
+//				result.getNormals().add(currentNormal);
+//				result.getIndices().add(currentVertexIndex);
+//				currentVertexIndex++;
+//			}
+//			else
+//				result.getIndices().add(indexMap.get(previousVertexIndex));
 		}
 
 		return result;
