@@ -184,32 +184,6 @@ public class OBJModel
 			}
 			else
 				result.getIndices().add(indexMap.get(previousVertexIndex));
-
-//			for(int j = 0; j < i; j++)
-//			{
-//				OBJIndex oldIndex = indices.get(j);
-//
-//				if(currentIndex.vertexIndex == oldIndex.vertexIndex
-//					&& currentIndex.texCoordIndex == oldIndex.texCoordIndex
-//					&& currentIndex.normalIndex == oldIndex.normalIndex)
-//				{
-//					previousVertexIndex = j;
-//					break;
-//				}
-//			}
-//
-//			if(previousVertexIndex == -1)
-//			{
-//				indexMap.put(i, currentVertexIndex);
-//
-//				result.getPositions().add(currentPosition);
-//				result.getTexCoords().add(currentTexCoord);
-//				result.getNormals().add(currentNormal);
-//				result.getIndices().add(currentVertexIndex);
-//				currentVertexIndex++;
-//			}
-//			else
-//				result.getIndices().add(indexMap.get(previousVertexIndex));
 		}
 
 		return result;
@@ -236,9 +210,4 @@ public class OBJModel
 
 		return result;
 	}
-
-//	public ArrayList<Vector3f> getPositions() { return positions; }
-//	public ArrayList<Vector2f> getTexCoords() { return texCoords; }
-//	public ArrayList<Vector3f> getNormals() { return normals; }
-//	public ArrayList<OBJIndex> getIndices() { return indices; }
 }
