@@ -7,7 +7,6 @@ import com.base.engine.core.Vector3f;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class OBJModel
@@ -79,79 +78,14 @@ public class OBJModel
 		}
 	}
 
-	private int FindPreviousVertexIndex(ArrayList<OBJIndex> sortedIndices, OBJIndex currentIndex, int currentIndicesIndex)
-	{
-		int start = 0;
-		int end = sortedIndices.size();
-		int current = (end - start) / 2 + start;
-		int previous = start;
-
-		while(current != previous)
-		{
-			OBJIndex testIndex = sortedIndices.get(current);
-
-			if(testIndex.vertexIndex == currentIndex.vertexIndex)
-			{
-				int countStart = current;
-
-				for(countStart = current; countStart >= 0; countStart--)
-				{
-					if(sortedIndices.get(countStart).vertexIndex != currentIndex.vertexIndex)
-						break;
-				}
-				countStart++;
-
-				for(int i = countStart; i < sortedIndices.size(); i++)
-				{
-					OBJIndex possibleIndex = sortedIndices.get(i);
-
-					if(sortedIndices.get(i).vertexIndex != currentIndex.vertexIndex)
-						break;
-
-					if(possibleIndex == currentIndex)
-						continue;
-
-					if((!hasTexCoords || possibleIndex.texCoordIndex == currentIndex.texCoordIndex)
-						&& (!hasNormals || possibleIndex.normalIndex == currentIndex.normalIndex)
-						&& (possibleIndex.orderTag < currentIndicesIndex))
-					{
-						return possibleIndex.orderTag;
-					}
-				}
-
-				return -1;
-			}
-			else
-			{
-				if(testIndex.vertexIndex < currentIndex.vertexIndex)
-					start = current;
-				else
-					end = current;
-			}
-
-			previous = current;
-			current = (end - start) / 2 + start;
-		}
-
-		return -1;
-	}
-
 	public IndexedModel toIndexedModel()
 	{
 		IndexedModel result = new IndexedModel();
+		IndexedModel normalModel = new IndexedModel();
+		HashMap<OBJIndex, Integer> resultIndexMap = new HashMap<OBJIndex, Integer>();
+		HashMap<Integer, Integer> normalIndexMap = new HashMap<Integer, Integer>();
 		HashMap<Integer, Integer> indexMap = new HashMap<Integer, Integer>();
 
-		ArrayList<OBJIndex> sortedIndices = new ArrayList<OBJIndex>();
-		for (int i = 0; i < indices.size(); i++)
-		{
-			OBJIndex index = indices.get(i);
-			index.orderTag = i;
-			sortedIndices.add(index);
-		}
-
-		Collections.sort(sortedIndices);
-
-		int currentVertexIndex = 0;
 		for(int i = 0; i < indices.size(); i++)
 		{
 			OBJIndex currentIndex = indices.get(i);
@@ -170,20 +104,42 @@ public class OBJModel
 			else
 				currentNormal = new Vector3f(0,0,0);
 
-			int previousVertexIndex = FindPreviousVertexIndex(sortedIndices, currentIndex, i);
+			Integer modelVertexIndex = resultIndexMap.get(currentIndex);
 
-			if(previousVertexIndex == -1)
+			if(modelVertexIndex == null)
 			{
-				indexMap.put(i, currentVertexIndex);
+				modelVertexIndex = result.getPositions().size();
+				resultIndexMap.put(currentIndex, modelVertexIndex);
 
 				result.getPositions().add(currentPosition);
 				result.getTexCoords().add(currentTexCoord);
-				result.getNormals().add(currentNormal);
-				result.getIndices().add(currentVertexIndex);
-				currentVertexIndex++;
+				if(hasNormals)
+					result.getNormals().add(currentNormal);
 			}
-			else
-				result.getIndices().add(indexMap.get(previousVertexIndex));
+
+			Integer normalModelIndex = normalIndexMap.get(currentIndex.vertexIndex);
+
+			if(normalModelIndex == null)
+			{
+				normalModelIndex = normalModel.getPositions().size();
+				normalIndexMap.put(currentIndex.vertexIndex, normalModelIndex);
+
+				normalModel.getPositions().add(currentPosition);
+				normalModel.getTexCoords().add(currentTexCoord);
+				normalModel.getNormals().add(currentNormal);
+			}
+
+			result.getIndices().add(modelVertexIndex);
+			normalModel.getIndices().add(normalModelIndex);
+			indexMap.put(modelVertexIndex, normalModelIndex);
+		}
+
+		if(!hasNormals)
+		{
+			normalModel.calcNormals();
+
+			for(int i = 0; i < result.getPositions().size(); i++)
+				result.getNormals().add(normalModel.getNormals().get(indexMap.get(i)));
 		}
 
 		return result;

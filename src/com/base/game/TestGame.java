@@ -84,6 +84,9 @@ public class TestGame extends Game
 		addObject(testMesh1);
 		addObject(testMesh3);
 
-		directionalLight.getTransform().setRot(new Quaternion(new Vector3f(1,0,0), (float)Math.toRadians(-45)));
+		testMesh3.getTransform().getPos().set(5,5,5);
+		testMesh3.getTransform().setRot(new Quaternion(new Vector3f(0,1,0), (float)Math.toRadians(-70.0f)));
+
+		directionalLight.getTransform().setRot(new Quaternion(new Vector3f(1, 0, 0), (float) Math.toRadians(-45)));
 	}
 }
