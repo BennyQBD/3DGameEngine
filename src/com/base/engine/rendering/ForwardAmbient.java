@@ -14,18 +14,7 @@ public class ForwardAmbient extends Shader
 
 	private ForwardAmbient()
 	{
-		super();
-
-		addVertexShaderFromFile("forward-ambient.vs");
-		addFragmentShaderFromFile("forward-ambient.fs");
-
-		setAttribLocation("position", 0);
-		setAttribLocation("texCoord", 1);
-
-		compileShader();
-
-		addUniform("MVP");
-		addUniform("ambientIntensity");
+		super("forward-ambient");
 	}
 
 	public void updateUniforms(Transform transform, Material material, RenderingEngine renderingEngine)
