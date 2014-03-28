@@ -35,4 +35,6 @@ public abstract class Game
 
 		return root;
 	}
+
+	public void setEngine(CoreEngine engine) { getRootObject().setEngine(engine); }
 }

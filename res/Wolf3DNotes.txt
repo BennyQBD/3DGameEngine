@@ -16,7 +16,7 @@ Other topics:
 -More Control over textures (Filtering, Formatting)
 +More friendly constructors
 =Window should have more properties (Center position, fullscreen, maybe mouse locking)
--Better vector math (normalization, +=, Commonly used Vector constants, Swizzling support)
+=Better vector math (normalization, +=, Commonly used Vector constants, Swizzling support)
 -Options class/system, some place to read values that the player chooses
 +Centralized "level" or "scene" class that holds the data the game is using
 +Game object class
@@ -25,7 +25,7 @@ Other topics:
 +Vector swizzling
 +Make all time based on seconds rather than nanoseconds
 +Change the way delta is passed
--Give vectors a copy constructor
++Give vectors a copy constructor
 +Give vectors an interpolation method
 -Transparency Support
 -Sprite Support

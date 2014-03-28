@@ -11,17 +11,20 @@ public class GameObject
 	private ArrayList<GameObject> children;
 	private ArrayList<GameComponent> components;
 	private Transform transform;
+	private CoreEngine engine;
 
 	public GameObject()
 	{
 		children = new ArrayList<GameObject>();
 		components = new ArrayList<GameComponent>();
 		transform = new Transform();
+		engine = null;
 	}
 
 	public void addChild(GameObject child)
 	{
 		children.add(child);
+		child.setEngine(engine);
 		child.getTransform().setParent(transform);
 	}
 
@@ -62,17 +65,22 @@ public class GameObject
 			child.render(shader, renderingEngine);
 	}
 
-	public void addToRenderingEngine(RenderingEngine renderingEngine)
-	{
-		for(GameComponent component : components)
-			component.addToRenderingEngine(renderingEngine);
-
-		for(GameObject child : children)
-			child.addToRenderingEngine(renderingEngine);
-	}
-
 	public Transform getTransform()
 	{
 		return transform;
+	}
+
+	public void setEngine(CoreEngine engine)
+	{
+		if(this.engine != engine)
+		{
+			this.engine = engine;
+
+			for(GameComponent component : components)
+				component.addToEngine(engine);
+
+			for(GameObject child : children)
+				child.setEngine(engine);
+		}
 	}
 }
