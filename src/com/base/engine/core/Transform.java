@@ -43,6 +43,16 @@ public class Transform
 		rot = new Quaternion(axis, angle).mul(rot).normalized();
 	}
 
+	public void lookAt(Vector3f point, Vector3f up)
+	{
+		rot = getLookAtDirection(point, up);
+	}
+
+	public Quaternion getLookAtDirection(Vector3f point, Vector3f up)
+	{
+		return new Quaternion(new Matrix4f().initRotation(point.sub(pos).normalized(), up));
+	}
+
 	public boolean hasChanged()
 	{
 		if(parent != null && parent.hasChanged())
