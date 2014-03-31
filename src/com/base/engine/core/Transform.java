@@ -45,10 +45,10 @@ public class Transform
 
 	public void lookAt(Vector3f point, Vector3f up)
 	{
-		rot = getLookAtDirection(point, up);
+		rot = getLookAtRotation(point, up);
 	}
 
-	public Quaternion getLookAtDirection(Vector3f point, Vector3f up)
+	public Quaternion getLookAtRotation(Vector3f point, Vector3f up)
 	{
 		return new Quaternion(new Matrix4f().initRotation(point.sub(pos).normalized(), up));
 	}

@@ -14,7 +14,7 @@ public class LookAtComponent extends GameComponent
 	{
 		if(renderingEngine != null)
 		{
-			Quaternion newRot = getTransform().getLookAtDirection(renderingEngine.getMainCamera().getTransform().getTransformedPos(),
+			Quaternion newRot = getTransform().getLookAtRotation(renderingEngine.getMainCamera().getTransform().getTransformedPos(),
 					new Vector3f(0,1,0));
 					//getTransform().getRot().getUp());
 
