@@ -83,6 +83,7 @@ public class Mesh
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, Vertex.SIZE * 4, 0);
 		glVertexAttribPointer(1, 2, GL_FLOAT, false, Vertex.SIZE * 4, 12);
 		glVertexAttribPointer(2, 3, GL_FLOAT, false, Vertex.SIZE * 4, 20);
+		glVertexAttribPointer(3, 3, GL_FLOAT, false, Vertex.SIZE * 4, 32);
 		
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, resource.getIbo());
 		glDrawElements(GL_TRIANGLES, resource.getSize(), GL_UNSIGNED_INT, 0);
@@ -121,7 +122,7 @@ public class Mesh
 
 		if(!ext.equals("obj"))
 		{
-			System.err.println("Error: File format not supported for mesh data: " + ext);
+			System.err.println("Error: '" + ext + "' file format not supported for mesh data.");
 			new Exception().printStackTrace();
 			System.exit(1);
 		}
@@ -136,7 +137,8 @@ public class Mesh
 		{
 			vertices.add(new Vertex(model.getPositions().get(i),
 					model.getTexCoords().get(i),
-					model.getNormals().get(i)));
+					model.getNormals().get(i),
+					model.getTangents().get(i)));
 		}
 
 		Vertex[] vertexData = new Vertex[vertices.size()];
