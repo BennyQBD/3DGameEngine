@@ -1,6 +1,5 @@
 package com.base.engine.rendering;
 
-import com.base.engine.core.Vector3f;
 import com.base.engine.rendering.resourceManagement.MappedValues;
 
 import java.util.HashMap;
@@ -13,6 +12,7 @@ public class Material extends MappedValues
 	{
 		super();
 		textureHashMap = new HashMap<String, Texture>();
+		textureHashMap.put("normalMap", new Texture("default_normal.jpg"));
 	}
 
 	public void addTexture(String name, Texture texture) { textureHashMap.put(name, texture); }
