@@ -61,7 +61,9 @@ public class IndexedModel
 			float deltaU2 = texCoords.get(i2).getX() - texCoords.get(i0).getX();
 			float deltaV2 = texCoords.get(i2).getY() - texCoords.get(i0).getY();
 
-			float f = 1.0f/(deltaU1*deltaV2 - deltaU2*deltaV1);
+			float dividend = (deltaU1*deltaV2 - deltaU2*deltaV1);
+			//TODO: The first 1.0f may need to be changed to 0.0f here.
+			float f = dividend == 0 ? 1.0f : 1.0f/dividend;
 
 			Vector3f tangent = new Vector3f(0,0,0);
 			tangent.setX(f * (deltaV2 * edge1.getX() - deltaV1 * edge2.getX()));
