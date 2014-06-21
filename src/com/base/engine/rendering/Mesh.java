@@ -169,6 +169,6 @@ public class Mesh
 
 		addVertices(vertexData, Util.toIntArray(indexData), false);
 		
-		return null;
+		return this;
 	}
 }
