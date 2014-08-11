@@ -70,6 +70,7 @@ public class RenderingEngine extends MappedValues
 
 	public void render(GameObject object)
 	{
+		if (getMainCamera() == null) System.err.println("Error! Main camera not found. This is very very big bug, and game will crash.");
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		object.renderAll(forwardAmbient, this);
