@@ -84,7 +84,7 @@ public class Mesh
 		resource = new MeshResource(indices.length);
 		
 		glBindBuffer(GL_ARRAY_BUFFER, resource.getVbo());
-		GL15.glBufferData(GL_ARRAY_BUFFER, Util.createFlippedBuffer(vertices), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, Util.createFlippedBuffer(vertices), GL_STATIC_DRAW);
 		
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, resource.getIbo());
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, Util.createFlippedBuffer(indices), GL_STATIC_DRAW);
@@ -102,7 +102,6 @@ public class Mesh
 		glVertexAttribPointer(1, 2, GL_FLOAT, false, Vertex.SIZE * 4, 12);
 		glVertexAttribPointer(2, 3, GL_FLOAT, false, Vertex.SIZE * 4, 20);
 		glVertexAttribPointer(3, 3, GL_FLOAT, false, Vertex.SIZE * 4, 32);
-		glVertexAttribPointer(3, 3, GL_FLOAT, false, Vertex.SIZE * 4, 44);
 		
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, resource.getIbo());
 		glDrawElements(GL_TRIANGLES, resource.getSize(), GL_UNSIGNED_INT, 0);
@@ -149,7 +148,6 @@ public class Mesh
 
 		OBJModel test = new OBJModel("./res/models/" + fileName);
 		IndexedModel model = test.toIndexedModel();
-		model.calcNormals();
 
 		ArrayList<Vertex> vertices = new ArrayList<Vertex>();
 

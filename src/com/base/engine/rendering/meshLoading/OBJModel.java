@@ -165,6 +165,9 @@ public class OBJModel
 		for(int i = 0; i < result.getPositions().size(); i++)
 			result.getTangents().add(normalModel.getTangents().get(indexMap.get(i)));
 
+		for(int i = 0; i < result.getTexCoords().size(); i++)
+			result.getTexCoords().get(i).setY(1.0f - result.getTexCoords().get(i).getY());
+
 		return result;
 	}
 
@@ -177,8 +180,11 @@ public class OBJModel
 
 		if(values.length > 1)
 		{
-			hasTexCoords = true;
-			result.texCoordIndex = Integer.parseInt(values[1]) - 1;
+			if(!values[1].isEmpty())
+			{
+				hasTexCoords = true;
+				result.texCoordIndex = Integer.parseInt(values[1]) - 1;
+			}
 
 			if(values.length > 2)
 			{
