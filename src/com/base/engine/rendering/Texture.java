@@ -80,9 +80,6 @@ public class Texture
 	
 	private static TextureResource loadTexture(String fileName)
 	{
-		String[] splitArray = fileName.split("\\.");
-		String ext = splitArray[splitArray.length - 1];
-		
 		try
 		{
 			BufferedImage image = ImageIO.read(new File("./res/textures/" + fileName));
