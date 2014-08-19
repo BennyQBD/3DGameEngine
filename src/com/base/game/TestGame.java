@@ -25,17 +25,11 @@ public class TestGame extends Game
 	public void init()
 	{
 		Mesh mesh = new Mesh("plane3.obj");
-		Material material = new Material();//new Texture("test.png"), new Vector3f(1,1,1), 1, 8);
-		material.addTexture("diffuse", new Texture("bricks.jpg"));
-		material.addTexture("normalMap", new Texture("bricks_normal.jpg"));
-		material.addFloat("specularIntensity", 1);
-		material.addFloat("specularPower", 8);
+		Material material2 = new Material(new Texture("bricks.jpg"), 1, 8,
+			new Texture("bricks_normal.jpg"), new Texture("bricks_disp.png"), 0.03f, -0.5f);
 
-		Material material2 = new Material();//new Texture("test.png"), new Vector3f(1,1,1), 1, 8);
-		material2.addTexture("diffuse", new Texture("bricks2.jpg"));
-		material2.addTexture("normalMap", new Texture("bricks2_normal.jpg"));
-		material2.addFloat("specularIntensity", 1);
-		material2.addFloat("specularPower", 8);
+		Material material = new Material(new Texture("bricks2.jpg"), 1, 8,
+				new Texture("bricks2_normal.jpg"), new Texture("bricks2_disp.jpg"), 0.04f, -1.0f);
 
 		Mesh tempMesh = new Mesh("monkey3.obj");
 
@@ -71,7 +65,9 @@ public class TestGame extends Game
 
 		addObject(
 				//addObject(
-				new GameObject().addComponent(new FreeLook(0.5f)).addComponent(new FreeMove(10.0f)).addComponent(new Camera((float) Math.toRadians(70.0f), (float) Window.getWidth() / (float) Window.getHeight(), 0.01f, 1000.0f)));
+				new GameObject().addComponent(new FreeLook(0.5f)).addComponent(new FreeMove(10.0f))
+						.addComponent(new Camera(new Matrix4f().initPerspective((float) Math.toRadians(70.0f),
+								(float) Window.getWidth() / (float) Window.getHeight(), 0.01f, 1000.0f))));
 
 		addObject(testMesh3);
 

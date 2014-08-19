@@ -66,7 +66,7 @@ public class OBJModel
 				else if(tokens[0].equals("vt"))
 				{
 					texCoords.add(new Vector2f(Float.valueOf(tokens[1]),
-							Float.valueOf(tokens[2])));
+							1.0f - Float.valueOf(tokens[2])));
 				}
 				else if(tokens[0].equals("vn"))
 				{
@@ -164,8 +164,8 @@ public class OBJModel
 		for(int i = 0; i < result.getPositions().size(); i++)
 			result.getTangents().add(normalModel.getTangents().get(indexMap.get(i)));
 
-		for(int i = 0; i < result.getTexCoords().size(); i++)
-			result.getTexCoords().get(i).setY(1.0f - result.getTexCoords().get(i).getY());
+//		for(int i = 0; i < result.getTexCoords().size(); i++)
+//			result.getTexCoords().get(i).setY(1.0f - result.getTexCoords().get(i).getY());
 
 		return result;
 	}
