@@ -31,61 +31,61 @@ import javax.imageio.ImageIO;
 
 public class Texture
 {
-	private static HashMap<String, TextureResource> loadedTextures = new HashMap<String, TextureResource>();
-	private TextureResource resource;
-	private String fileName;
+	private static HashMap<String, TextureResource> s_loadedTextures = new HashMap<String, TextureResource>();
+	private TextureResource m_resource;
+	private String          m_fileName;
 	
 	public Texture(String fileName)
 	{
-		this.fileName = fileName;
-		TextureResource oldResource = loadedTextures.get(fileName);
+		this.m_fileName = fileName;
+		TextureResource oldResource = s_loadedTextures.get(fileName);
 
 		if(oldResource != null)
 		{
-			resource = oldResource;
-			resource.addReference();
+			m_resource = oldResource;
+			m_resource.AddReference();
 		}
 		else
 		{
-			resource = loadTexture(fileName);
-			loadedTextures.put(fileName, resource);
+			m_resource = LoadTexture(fileName);
+			s_loadedTextures.put(fileName, m_resource);
 		}
 	}
 
 	@Override
 	protected void finalize()
 	{
-		if(resource.removeReference() && !fileName.isEmpty())
+		if(m_resource.RemoveReference() && !m_fileName.isEmpty())
 		{
-			loadedTextures.remove(fileName);
+			s_loadedTextures.remove(m_fileName);
 		}
 	}
 
-	public void bind()
+	public void Bind()
 	{
-		bind(0);
+		Bind(0);
 	}
 
-	public void bind(int samplerSlot)
+	public void Bind(int samplerSlot)
 	{
 		assert(samplerSlot >= 0 && samplerSlot <= 31);
 		glActiveTexture(GL_TEXTURE0 + samplerSlot);
-		glBindTexture(GL_TEXTURE_2D, resource.getId());
+		glBindTexture(GL_TEXTURE_2D, m_resource.GetId());
 	}
 	
-	public int getID()
+	public int GetID()
 	{
-		return resource.getId();
+		return m_resource.GetId();
 	}
 	
-	private static TextureResource loadTexture(String fileName)
+	private static TextureResource LoadTexture(String fileName)
 	{
 		try
 		{
 			BufferedImage image = ImageIO.read(new File("./res/textures/" + fileName));
 			int[] pixels = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
 
-			ByteBuffer buffer = Util.createByteBuffer(image.getHeight() * image.getWidth() * 4);
+			ByteBuffer buffer = Util.CreateByteBuffer(image.getHeight() * image.getWidth() * 4);
 			boolean hasAlpha = image.getColorModel().hasAlpha();
 
 			for(int y = 0; y < image.getHeight(); y++)
@@ -107,7 +107,7 @@ public class Texture
 			buffer.flip();
 
 			TextureResource resource = new TextureResource();
-			glBindTexture(GL_TEXTURE_2D, resource.getId());
+			glBindTexture(GL_TEXTURE_2D, resource.GetId());
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

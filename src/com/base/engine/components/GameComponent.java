@@ -24,22 +24,22 @@ import com.base.engine.rendering.Shader;
 
 public abstract class GameComponent
 {
-	private GameObject parent;
+	private GameObject m_parent;
 
-	public void input(float delta) {}
-	public void update(float delta) {}
-	public void render(Shader shader, RenderingEngine renderingEngine) {}
+	public void Input(float delta) {}
+	public void Update(float delta) {}
+	public void Render(Shader shader, RenderingEngine renderingEngine) {}
 
-	public void setParent(GameObject parent)
+	public void SetParent(GameObject parent)
 	{
-		this.parent = parent;
+		this.m_parent = parent;
 	}
 
-	public Transform getTransform()
+	public Transform GetTransform()
 	{
-		return parent.getTransform();
+		return m_parent.GetTransform();
 	}
 
-	public void addToEngine(CoreEngine engine) {}
+	public void AddToEngine(CoreEngine engine) {}
 }
 

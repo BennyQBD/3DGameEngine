@@ -23,25 +23,25 @@ import com.base.engine.rendering.Shader;
 
 public class LookAtComponent extends GameComponent
 {
-	RenderingEngine renderingEngine;
+	private RenderingEngine m_renderingEngine;
 
 	@Override
-	public void update(float delta)
+	public void Update(float delta)
 	{
-		if(renderingEngine != null)
+		if(m_renderingEngine != null)
 		{
-			Quaternion newRot = getTransform().getLookAtRotation(renderingEngine.getMainCamera().getTransform().getTransformedPos(),
-					new Vector3f(0,1,0));
-					//getTransform().getRot().getUp());
+			Quaternion newRot = GetTransform().GetLookAtRotation(m_renderingEngine.GetMainCamera().GetTransform().GetTransformedPos(),
+					new Vector3f(0, 1, 0));
+					//GetTransform().GetRot().GetUp());
 
-			getTransform().setRot(getTransform().getRot().nlerp(newRot, delta * 5.0f, true));
-			//getTransform().setRot(getTransform().getRot().slerp(newRot, delta * 5.0f, true));
+			GetTransform().SetRot(GetTransform().GetRot().NLerp(newRot, delta * 5.0f, true));
+			//GetTransform().SetRot(GetTransform().GetRot().SLerp(newRot, delta * 5.0f, true));
 		}
 	}
 
 	@Override
-	public void render(Shader shader, RenderingEngine renderingEngine)
+	public void Render(Shader shader, RenderingEngine renderingEngine)
 	{
-		this.renderingEngine = renderingEngine;
+		this.m_renderingEngine = renderingEngine;
 	}
 }

@@ -23,11 +23,11 @@ import com.base.engine.rendering.Window;
 
 public class FreeLook extends GameComponent
 {
-	private static final Vector3f yAxis = new Vector3f(0,1,0);
+	private static final Vector3f Y_AXIS = new Vector3f(0,1,0);
 
-	private boolean mouseLocked = false;
-	private float sensitivity;
-	private int unlockMouseKey;
+	private boolean m_mouseLocked = false;
+	private float   m_sensitivity;
+	private int     m_unlockMouseKey;
 
 	public FreeLook(float sensitivity)
 	{
@@ -36,41 +36,41 @@ public class FreeLook extends GameComponent
 
 	public FreeLook(float sensitivity, int unlockMouseKey)
 	{
-		this.sensitivity = sensitivity;
-		this.unlockMouseKey = unlockMouseKey;
+		this.m_sensitivity = sensitivity;
+		this.m_unlockMouseKey = unlockMouseKey;
 	}
 
 	@Override
-	public void input(float delta)
+	public void Input(float delta)
 	{
-		Vector2f centerPosition = new Vector2f(Window.getWidth()/2, Window.getHeight()/2);
+		Vector2f centerPosition = new Vector2f(Window.GetWidth()/2, Window.GetHeight()/2);
 
-		if(Input.getKey(unlockMouseKey))
+		if(Input.GetKey(m_unlockMouseKey))
 		{
-			Input.setCursor(true);
-			mouseLocked = false;
+			Input.SetCursor(true);
+			m_mouseLocked = false;
 		}
-		if(Input.getMouseDown(0))
+		if(Input.GetMouseDown(0))
 		{
-			Input.setMousePosition(centerPosition);
-			Input.setCursor(false);
-			mouseLocked = true;
+			Input.SetMousePosition(centerPosition);
+			Input.SetCursor(false);
+			m_mouseLocked = true;
 		}
 
-		if(mouseLocked)
+		if(m_mouseLocked)
 		{
-			Vector2f deltaPos = Input.getMousePosition().sub(centerPosition);
+			Vector2f deltaPos = Input.GetMousePosition().Sub(centerPosition);
 
-			boolean rotY = deltaPos.getX() != 0;
-			boolean rotX = deltaPos.getY() != 0;
+			boolean rotY = deltaPos.GetX() != 0;
+			boolean rotX = deltaPos.GetY() != 0;
 
 			if(rotY)
-				getTransform().rotate(yAxis, (float) Math.toRadians(deltaPos.getX() * sensitivity));
+				GetTransform().Rotate(Y_AXIS, (float) Math.toRadians(deltaPos.GetX() * m_sensitivity));
 			if(rotX)
-				getTransform().rotate(getTransform().getRot().getRight(), (float) Math.toRadians(-deltaPos.getY() * sensitivity));
+				GetTransform().Rotate(GetTransform().GetRot().GetRight(), (float) Math.toRadians(-deltaPos.GetY() * m_sensitivity));
 
 			if(rotY || rotX)
-				Input.setMousePosition(centerPosition);
+				Input.SetMousePosition(centerPosition);
 		}
 	}
 }

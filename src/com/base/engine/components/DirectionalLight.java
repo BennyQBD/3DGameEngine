@@ -25,11 +25,11 @@ public class DirectionalLight extends BaseLight
 	{
 		super(color, intensity);
 
-		setShader(new Shader("forward-directional"));
+		SetShader(new Shader("forward-directional"));
 	}
 
-	public Vector3f getDirection()
+	public Vector3f GetDirection()
 	{
-		return getTransform().getTransformedRot().getForward();
+		return GetTransform().GetTransformedRot().GetForward();
 	}
 }

@@ -20,37 +20,37 @@ import com.base.engine.rendering.RenderingEngine;
 
 public abstract class Game
 {
-	private GameObject root;
+	private GameObject m_root;
 
-	public void init() {}
+	public void Init() {}
 
-	public void input(float delta)
+	public void Input(float delta)
 	{
-		getRootObject().inputAll(delta);
+		GetRootObject().InputAll(delta);
 	}
 
-	public void update(float delta)
+	public void Update(float delta)
 	{
-		getRootObject().updateAll(delta);
+		GetRootObject().UpdateAll(delta);
 	}
 
-	public void render(RenderingEngine renderingEngine)
+	public void Render(RenderingEngine renderingEngine)
 	{
-		renderingEngine.render(getRootObject());
+		renderingEngine.Render(GetRootObject());
 	}
 
-	public void addObject(GameObject object)
+	public void AddObject(GameObject object)
 	{
-		getRootObject().addChild(object);
+		GetRootObject().AddChild(object);
 	}
 
-	private GameObject getRootObject()
+	private GameObject GetRootObject()
 	{
-		if(root == null)
-			root = new GameObject();
+		if(m_root == null)
+			m_root = new GameObject();
 
-		return root;
+		return m_root;
 	}
 
-	public void setEngine(CoreEngine engine) { getRootObject().setEngine(engine); }
+	public void SetEngine(CoreEngine engine) { GetRootObject().SetEngine(engine); }
 }

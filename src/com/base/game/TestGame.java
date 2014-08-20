@@ -22,7 +22,7 @@ import com.base.engine.rendering.*;
 
 public class TestGame extends Game
 {
-	public void init()
+	public void Init()
 	{
 		Mesh mesh = new Mesh("plane3.obj");
 		Material material2 = new Material(new Texture("bricks.jpg"), 1, 8,
@@ -36,46 +36,46 @@ public class TestGame extends Game
 		MeshRenderer meshRenderer = new MeshRenderer(mesh, material);
 
 		GameObject planeObject = new GameObject();
-		planeObject.addComponent(meshRenderer);
-		planeObject.getTransform().getPos().set(0, -1, 5);
+		planeObject.AddComponent(meshRenderer);
+		planeObject.GetTransform().GetPos().Set(0, -1, 5);
 
 		GameObject directionalLightObject = new GameObject();
 		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(0,0,1), 0.4f);
 
-		directionalLightObject.addComponent(directionalLight);
+		directionalLightObject.AddComponent(directionalLight);
 
 		GameObject pointLightObject = new GameObject();
-		pointLightObject.addComponent(new PointLight(new Vector3f(0,1,0), 0.4f, new Attenuation(0,0,1)));
+		pointLightObject.AddComponent(new PointLight(new Vector3f(0, 1, 0), 0.4f, new Attenuation(0, 0, 1)));
 
 		SpotLight spotLight = new SpotLight(new Vector3f(0,1,1), 0.4f,
 				new Attenuation(0,0,0.1f), 0.7f);
 
 		GameObject spotLightObject = new GameObject();
-		spotLightObject.addComponent(spotLight);
+		spotLightObject.AddComponent(spotLight);
 
-		spotLightObject.getTransform().getPos().set(5, 0, 5);
-		spotLightObject.getTransform().setRot(new Quaternion(new Vector3f(0,1,0), (float)Math.toRadians(90.0f)));
+		spotLightObject.GetTransform().GetPos().Set(5, 0, 5);
+		spotLightObject.GetTransform().SetRot(new Quaternion(new Vector3f(0, 1, 0), (float) Math.toRadians(90.0f)));
 
-		addObject(planeObject);
-		addObject(directionalLightObject);
-		addObject(pointLightObject);
-		addObject(spotLightObject);
+		AddObject(planeObject);
+		AddObject(directionalLightObject);
+		AddObject(pointLightObject);
+		AddObject(spotLightObject);
 
-		GameObject testMesh3 = new GameObject().addComponent(new LookAtComponent()).addComponent(new MeshRenderer(tempMesh, material));
+		GameObject testMesh3 = new GameObject().AddComponent(new LookAtComponent()).AddComponent(new MeshRenderer(tempMesh, material));
 
-		addObject(
-				//addObject(
-				new GameObject().addComponent(new FreeLook(0.5f)).addComponent(new FreeMove(10.0f))
-						.addComponent(new Camera(new Matrix4f().initPerspective((float) Math.toRadians(70.0f),
-								(float) Window.getWidth() / (float) Window.getHeight(), 0.01f, 1000.0f))));
+		AddObject(
+				//AddObject(
+				new GameObject().AddComponent(new FreeLook(0.5f)).AddComponent(new FreeMove(10.0f))
+						.AddComponent(new Camera(new Matrix4f().InitPerspective((float) Math.toRadians(70.0f),
+								(float) Window.GetWidth() / (float) Window.GetHeight(), 0.01f, 1000.0f))));
 
-		addObject(testMesh3);
+		AddObject(testMesh3);
 
-		testMesh3.getTransform().getPos().set(5,5,5);
-		testMesh3.getTransform().setRot(new Quaternion(new Vector3f(0,1,0), (float)Math.toRadians(-70.0f)));
+		testMesh3.GetTransform().GetPos().Set(5, 5, 5);
+		testMesh3.GetTransform().SetRot(new Quaternion(new Vector3f(0, 1, 0), (float) Math.toRadians(-70.0f)));
 
-		addObject(new GameObject().addComponent(new MeshRenderer(new Mesh("monkey3.obj"), material2)));
+		AddObject(new GameObject().AddComponent(new MeshRenderer(new Mesh("monkey3.obj"), material2)));
 
-		directionalLight.getTransform().setRot(new Quaternion(new Vector3f(1, 0, 0), (float) Math.toRadians(-45)));
+		directionalLight.GetTransform().SetRot(new Quaternion(new Vector3f(1, 0, 0), (float) Math.toRadians(-45)));
 	}
 }

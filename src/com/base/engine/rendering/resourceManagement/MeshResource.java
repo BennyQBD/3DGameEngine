@@ -20,46 +20,38 @@ import static org.lwjgl.opengl.GL15.*;
 
 public class MeshResource
 {
-	private int vbo;
-	private int ibo;
-	private int size;
-	private int refCount;
+	private int m_vbo;
+	private int m_ibo;
+	private int m_size;
+	private int m_refCount;
 
 	public MeshResource(int size)
 	{
-		vbo = glGenBuffers();
-		ibo = glGenBuffers();
-		this.size = size;
-		this.refCount = 1;
+		m_vbo = glGenBuffers();
+		m_ibo = glGenBuffers();
+		this.m_size = size;
+		this.m_refCount = 1;
 	}
 
 	@Override
 	protected void finalize()
 	{
-		glDeleteBuffers(vbo);
-		glDeleteBuffers(ibo);
+		glDeleteBuffers(m_vbo);
+		glDeleteBuffers(m_ibo);
 	}
 
-	public void addReference()
+	public void AddReference()
 	{
-		refCount++;
+		m_refCount++;
 	}
 
-	public boolean removeReference()
+	public boolean RemoveReference()
 	{
-		refCount--;
-		return refCount == 0;
+		m_refCount--;
+		return m_refCount == 0;
 	}
 
-	public int getVbo() {
-		return vbo;
-	}
-
-	public int getIbo() {
-		return ibo;
-	}
-
-	public int getSize() {
-		return size;
-	}
+	public int GetVbo()  { return m_vbo; }
+	public int GetIbo()  { return m_ibo; }
+	public int GetSize() { return m_size; }
 }

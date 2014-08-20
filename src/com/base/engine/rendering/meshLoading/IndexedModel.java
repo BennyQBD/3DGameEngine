@@ -18,86 +18,85 @@ package com.base.engine.rendering.meshLoading;
 
 import com.base.engine.core.Vector2f;
 import com.base.engine.core.Vector3f;
-import com.base.engine.rendering.Vertex;
 
 import java.util.ArrayList;
 
 public class IndexedModel
 {
-	private ArrayList<Vector3f> positions;
-	private ArrayList<Vector2f> texCoords;
-	private ArrayList<Vector3f> normals;
-	private ArrayList<Vector3f> tangents;
-	private ArrayList<Integer> indices;
+	private ArrayList<Vector3f> m_positions;
+	private ArrayList<Vector2f> m_texCoords;
+	private ArrayList<Vector3f> m_normals;
+	private ArrayList<Vector3f> m_tangents;
+	private ArrayList<Integer>  m_indices;
 
 	public IndexedModel()
 	{
-		positions = new ArrayList<Vector3f>();
-		texCoords = new ArrayList<Vector2f>();
-		normals = new ArrayList<Vector3f>();
-		tangents = new ArrayList<Vector3f>();
-		indices = new ArrayList<Integer>();
+		m_positions = new ArrayList<Vector3f>();
+		m_texCoords = new ArrayList<Vector2f>();
+		m_normals = new ArrayList<Vector3f>();
+		m_tangents = new ArrayList<Vector3f>();
+		m_indices = new ArrayList<Integer>();
 	}
 
-	public void calcNormals()
+	public void CalcNormals()
 	{
-		for(int i = 0; i < indices.size(); i += 3)
+		for(int i = 0; i < m_indices.size(); i += 3)
 		{
-			int i0 = indices.get(i);
-			int i1 = indices.get(i + 1);
-			int i2 = indices.get(i + 2);
+			int i0 = m_indices.get(i);
+			int i1 = m_indices.get(i + 1);
+			int i2 = m_indices.get(i + 2);
 
-			Vector3f v1 = positions.get(i1).sub(positions.get(i0));
-			Vector3f v2 = positions.get(i2).sub(positions.get(i0));
+			Vector3f v1 = m_positions.get(i1).Sub(m_positions.get(i0));
+			Vector3f v2 = m_positions.get(i2).Sub(m_positions.get(i0));
 
-			Vector3f normal = v1.cross(v2).normalized();
+			Vector3f normal = v1.Cross(v2).Normalized();
 
-			normals.get(i0).set(normals.get(i0).add(normal));
-			normals.get(i1).set(normals.get(i1).add(normal));
-			normals.get(i2).set(normals.get(i2).add(normal));
+			m_normals.get(i0).Set(m_normals.get(i0).Add(normal));
+			m_normals.get(i1).Set(m_normals.get(i1).Add(normal));
+			m_normals.get(i2).Set(m_normals.get(i2).Add(normal));
 		}
 
-		for(int i = 0; i < normals.size(); i++)
-			normals.get(i).set(normals.get(i).normalized());
+		for(int i = 0; i < m_normals.size(); i++)
+			m_normals.get(i).Set(m_normals.get(i).Normalized());
 	}
 
-	public void calcTangents()
+	public void CalcTangents()
 	{
-		for(int i = 0; i < indices.size(); i += 3)
+		for(int i = 0; i < m_indices.size(); i += 3)
 		{
-			int i0 = indices.get(i);
-			int i1 = indices.get(i + 1);
-			int i2 = indices.get(i + 2);
+			int i0 = m_indices.get(i);
+			int i1 = m_indices.get(i + 1);
+			int i2 = m_indices.get(i + 2);
 
-			Vector3f edge1 = positions.get(i1).sub(positions.get(i0));
-			Vector3f edge2 = positions.get(i2).sub(positions.get(i0));
+			Vector3f edge1 = m_positions.get(i1).Sub(m_positions.get(i0));
+			Vector3f edge2 = m_positions.get(i2).Sub(m_positions.get(i0));
 
-			float deltaU1 = texCoords.get(i1).getX() - texCoords.get(i0).getX();
-			float deltaV1 = texCoords.get(i1).getY() - texCoords.get(i0).getY();
-			float deltaU2 = texCoords.get(i2).getX() - texCoords.get(i0).getX();
-			float deltaV2 = texCoords.get(i2).getY() - texCoords.get(i0).getY();
+			float deltaU1 = m_texCoords.get(i1).GetX() - m_texCoords.get(i0).GetX();
+			float deltaV1 = m_texCoords.get(i1).GetY() - m_texCoords.get(i0).GetY();
+			float deltaU2 = m_texCoords.get(i2).GetX() - m_texCoords.get(i0).GetX();
+			float deltaV2 = m_texCoords.get(i2).GetY() - m_texCoords.get(i0).GetY();
 
 			float dividend = (deltaU1*deltaV2 - deltaU2*deltaV1);
 			//TODO: The first 0.0f may need to be changed to 1.0f here.
 			float f = dividend == 0 ? 0.0f : 1.0f/dividend;
 
 			Vector3f tangent = new Vector3f(0,0,0);
-			tangent.setX(f * (deltaV2 * edge1.getX() - deltaV1 * edge2.getX()));
-			tangent.setY(f * (deltaV2 * edge1.getY() - deltaV1 * edge2.getY()));
-			tangent.setZ(f * (deltaV2 * edge1.getZ() - deltaV1 * edge2.getZ()));
+			tangent.SetX(f * (deltaV2 * edge1.GetX() - deltaV1 * edge2.GetX()));
+			tangent.SetY(f * (deltaV2 * edge1.GetY() - deltaV1 * edge2.GetY()));
+			tangent.SetZ(f * (deltaV2 * edge1.GetZ() - deltaV1 * edge2.GetZ()));
 
-			tangents.get(i0).set(tangents.get(i0).add(tangent));
-			tangents.get(i1).set(tangents.get(i1).add(tangent));
-			tangents.get(i2).set(tangents.get(i2).add(tangent));
+			m_tangents.get(i0).Set(m_tangents.get(i0).Add(tangent));
+			m_tangents.get(i1).Set(m_tangents.get(i1).Add(tangent));
+			m_tangents.get(i2).Set(m_tangents.get(i2).Add(tangent));
 		}
 
-		for(int i = 0; i < tangents.size(); i++)
-			tangents.get(i).set(tangents.get(i).normalized());
+		for(int i = 0; i < m_tangents.size(); i++)
+			m_tangents.get(i).Set(m_tangents.get(i).Normalized());
 	}
 
-	public ArrayList<Vector3f> getPositions() { return positions; }
-	public ArrayList<Vector2f> getTexCoords() { return texCoords; }
-	public ArrayList<Vector3f> getNormals() { return normals; }
-	public ArrayList<Vector3f> getTangents() { return tangents; }
-	public ArrayList<Integer> getIndices() { return indices; }
+	public ArrayList<Vector3f> GetPositions() { return m_positions; }
+	public ArrayList<Vector2f> GetTexCoords() { return m_texCoords; }
+	public ArrayList<Vector3f> GetNormals() { return m_normals; }
+	public ArrayList<Vector3f> GetTangents() { return m_tangents; }
+	public ArrayList<Integer>  GetIndices() { return m_indices; }
 }

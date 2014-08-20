@@ -24,105 +24,105 @@ import java.util.ArrayList;
 
 public class GameObject
 {
-	private ArrayList<GameObject> children;
-	private ArrayList<GameComponent> components;
-	private Transform transform;
-	private CoreEngine engine;
+	private ArrayList<GameObject> m_children;
+	private ArrayList<GameComponent> m_components;
+	private Transform m_transform;
+	private CoreEngine m_engine;
 
 	public GameObject()
 	{
-		children = new ArrayList<GameObject>();
-		components = new ArrayList<GameComponent>();
-		transform = new Transform();
-		engine = null;
+		m_children = new ArrayList<GameObject>();
+		m_components = new ArrayList<GameComponent>();
+		m_transform = new Transform();
+		m_engine = null;
 	}
 
-	public void addChild(GameObject child)
+	public void AddChild(GameObject child)
 	{
-		children.add(child);
-		child.setEngine(engine);
-		child.getTransform().setParent(transform);
+		m_children.add(child);
+		child.SetEngine(m_engine);
+		child.GetTransform().SetParent(m_transform);
 	}
 
-	public GameObject addComponent(GameComponent component)
+	public GameObject AddComponent(GameComponent component)
 	{
-		components.add(component);
-		component.setParent(this);
+		m_components.add(component);
+		component.SetParent(this);
 
 		return this;
 	}
 
-	public void inputAll(float delta)
+	public void InputAll(float delta)
 	{
-		input(delta);
+		Input(delta);
 
-		for(GameObject child : children)
-			child.inputAll(delta);
+		for(GameObject child : m_children)
+			child.InputAll(delta);
 	}
 
-	public void updateAll(float delta)
+	public void UpdateAll(float delta)
 	{
-		update(delta);
+		Update(delta);
 
-		for(GameObject child : children)
-			child.updateAll(delta);
+		for(GameObject child : m_children)
+			child.UpdateAll(delta);
 	}
 
-	public void renderAll(Shader shader, RenderingEngine renderingEngine)
+	public void RenderAll(Shader shader, RenderingEngine renderingEngine)
 	{
-		render(shader, renderingEngine);
+		Render(shader, renderingEngine);
 
-		for(GameObject child : children)
-			child.renderAll(shader, renderingEngine);
+		for(GameObject child : m_children)
+			child.RenderAll(shader, renderingEngine);
 	}
 
-	public void input(float delta)
+	public void Input(float delta)
 	{
-		transform.update();
+		m_transform.Update();
 
-		for(GameComponent component : components)
-			component.input(delta);
+		for(GameComponent component : m_components)
+			component.Input(delta);
 	}
 
-	public void update(float delta)
+	public void Update(float delta)
 	{
-		for(GameComponent component : components)
-			component.update(delta);
+		for(GameComponent component : m_components)
+			component.Update(delta);
 	}
 
-	public void render(Shader shader, RenderingEngine renderingEngine)
+	public void Render(Shader shader, RenderingEngine renderingEngine)
 	{
-		for(GameComponent component : components)
-			component.render(shader, renderingEngine);
+		for(GameComponent component : m_components)
+			component.Render(shader, renderingEngine);
 	}
 
-	public ArrayList<GameObject> getAllAttached()
+	public ArrayList<GameObject> GetAllAttached()
 	{
 		ArrayList<GameObject> result = new ArrayList<GameObject>();
 
-		for(GameObject child : children)
-			result.addAll(child.getAllAttached());
+		for(GameObject child : m_children)
+			result.addAll(child.GetAllAttached());
 
 		result.add(this);
 		return result;
 	}
 
-	public Transform getTransform()
+	public Transform GetTransform()
 	{
-		return transform;
+		return m_transform;
 	}
 
-	public void setEngine(CoreEngine engine)
+	public void SetEngine(CoreEngine engine)
 	{
-		if(this.engine != engine)
+		if(this.m_engine != engine)
 		{
-			this.engine = engine;
+			this.m_engine = engine;
 
-			for(GameComponent component : components)
-				component.addToEngine(engine);
+			for(GameComponent component : m_components)
+				component.AddToEngine(engine);
 
-			for(GameObject child : children)
-				child.setEngine(engine);
+			for(GameObject child : m_children)
+				child.SetEngine(engine);
 		}
 	}
 }

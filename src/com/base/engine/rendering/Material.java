@@ -22,29 +22,29 @@ import java.util.HashMap;
 
 public class Material extends MappedValues
 {
-	private HashMap<String, Texture> textureHashMap;
+	private HashMap<String, Texture> m_textureHashMap;
 
 	public Material(Texture diffuse, float specularIntensity, float specularPower, Texture normal,
 	                Texture dispMap, float dispMapScale, float dispMapOffset)
 	{
 		super();
-		textureHashMap = new HashMap<String, Texture>();
-		addTexture("diffuse", diffuse);
-		addFloat("specularIntensity", specularIntensity);
-		addFloat("specularPower", specularPower);
-		addTexture("normalMap", normal);
-		addTexture("dispMap", dispMap);
+		m_textureHashMap = new HashMap<String, Texture>();
+		AddTexture("diffuse", diffuse);
+		AddFloat("specularIntensity", specularIntensity);
+		AddFloat("specularPower", specularPower);
+		AddTexture("normalMap", normal);
+		AddTexture("dispMap", dispMap);
 
 		float baseBias = dispMapScale/2.0f;
-		addFloat("dispMapScale", dispMapScale);
-		addFloat("dispMapBias", -baseBias + baseBias * dispMapOffset);
+		AddFloat("dispMapScale", dispMapScale);
+		AddFloat("dispMapBias", -baseBias + baseBias * dispMapOffset);
 	}
 
-	public void addTexture(String name, Texture texture) { textureHashMap.put(name, texture); }
+	public void AddTexture(String name, Texture texture) { m_textureHashMap.put(name, texture); }
 
-	public Texture getTexture(String name)
+	public Texture GetTexture(String name)
 	{
-		Texture result = textureHashMap.get(name);
+		Texture result = m_textureHashMap.get(name);
 		if(result != null)
 			return result;
 

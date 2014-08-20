@@ -25,7 +25,7 @@ import org.lwjgl.opengl.DisplayMode;
 
 public class Window 
 {
-	public static void createWindow(int width, int height, String title)
+	public static void CreateWindow(int width, int height, String title)
 	{
 		Display.setTitle(title);
 		try 
@@ -41,40 +41,40 @@ public class Window
 		}
 	}
 	
-	public static void render()
+	public static void Render()
 	{
 		Display.update();
 	}
 	
-	public static void dispose()
+	public static void Dispose()
 	{
 		Display.destroy();
 		Keyboard.destroy();
 		Mouse.destroy();
 	}
 	
-	public static boolean isCloseRequested()
+	public static boolean IsCloseRequested()
 	{
 		return Display.isCloseRequested();
 	}
 	
-	public static int getWidth()
+	public static int GetWidth()
 	{
 		return Display.getDisplayMode().getWidth();
 	}
 	
-	public static int getHeight()
+	public static int GetHeight()
 	{
 		return Display.getDisplayMode().getHeight();
 	}
 	
-	public static String getTitle()
+	public static String GetTitle()
 	{
 		return Display.getTitle();
 	}
 
-	public Vector2f getCenter()
+	public Vector2f GetCenter()
 	{
-		return new Vector2f(getWidth()/2, getHeight()/2);
+		return new Vector2f(GetWidth()/2, GetHeight()/2);
 	}
 }

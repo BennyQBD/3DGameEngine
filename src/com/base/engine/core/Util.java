@@ -26,47 +26,47 @@ import org.lwjgl.BufferUtils;
 
 public class Util
 {
-	public static FloatBuffer createFloatBuffer(int size)
+	public static FloatBuffer CreateFloatBuffer(int size)
 	{
 		return BufferUtils.createFloatBuffer(size);
 	}
 	
-	public static IntBuffer createIntBuffer(int size)
+	public static IntBuffer CreateIntBuffer(int size)
 	{
 		return BufferUtils.createIntBuffer(size);
 	}
 
-	public static ByteBuffer createByteBuffer(int size)
+	public static ByteBuffer CreateByteBuffer(int size)
 	{
 		return BufferUtils.createByteBuffer(size);
 	}
 	
-	public static IntBuffer createFlippedBuffer(int... values)
+	public static IntBuffer CreateFlippedBuffer(int... values)
 	{
-		IntBuffer buffer = createIntBuffer(values.length);
+		IntBuffer buffer = CreateIntBuffer(values.length);
 		buffer.put(values);
 		buffer.flip();
 		
 		return buffer;
 	}
 	
-	public static FloatBuffer createFlippedBuffer(Vertex[] vertices)
+	public static FloatBuffer CreateFlippedBuffer(Vertex[] vertices)
 	{
-		FloatBuffer buffer = createFloatBuffer(vertices.length * Vertex.SIZE);
+		FloatBuffer buffer = CreateFloatBuffer(vertices.length * Vertex.SIZE);
 		
 		for(int i = 0; i < vertices.length; i++)
 		{
-			buffer.put(vertices[i].getPos().getX());
-			buffer.put(vertices[i].getPos().getY());
-			buffer.put(vertices[i].getPos().getZ());
-			buffer.put(vertices[i].getTexCoord().getX());
-			buffer.put(vertices[i].getTexCoord().getY());
-			buffer.put(vertices[i].getNormal().getX());
-			buffer.put(vertices[i].getNormal().getY());
-			buffer.put(vertices[i].getNormal().getZ());
-			buffer.put(vertices[i].getTangent().getX());
-			buffer.put(vertices[i].getTangent().getY());
-			buffer.put(vertices[i].getTangent().getZ());
+			buffer.put(vertices[i].GetPos().GetX());
+			buffer.put(vertices[i].GetPos().GetY());
+			buffer.put(vertices[i].GetPos().GetZ());
+			buffer.put(vertices[i].GetTexCoord().GetX());
+			buffer.put(vertices[i].GetTexCoord().GetY());
+			buffer.put(vertices[i].GetNormal().GetX());
+			buffer.put(vertices[i].GetNormal().GetY());
+			buffer.put(vertices[i].GetNormal().GetZ());
+			buffer.put(vertices[i].GetTangent().GetX());
+			buffer.put(vertices[i].GetTangent().GetY());
+			buffer.put(vertices[i].GetTangent().GetZ());
 		}
 		
 		buffer.flip();
@@ -74,20 +74,20 @@ public class Util
 		return buffer;
 	}
 	
-	public static FloatBuffer createFlippedBuffer(Matrix4f value)
+	public static FloatBuffer CreateFlippedBuffer(Matrix4f value)
 	{
-		FloatBuffer buffer = createFloatBuffer(4 * 4);
+		FloatBuffer buffer = CreateFloatBuffer(4 * 4);
 		
 		for(int i = 0; i < 4; i++)
 			for(int j = 0; j < 4; j++)
-				buffer.put(value.get(i, j));
+				buffer.put(value.Get(i, j));
 		
 		buffer.flip();
 		
 		return buffer;
 	}
 	
-	public static String[] removeEmptyStrings(String[] data)
+	public static String[] RemoveEmptyStrings(String[] data)
 	{
 		ArrayList<String> result = new ArrayList<String>();
 		
@@ -101,7 +101,7 @@ public class Util
 		return res;
 	}
 	
-	public static int[] toIntArray(Integer[] data)
+	public static int[] ToIntArray(Integer[] data)
 	{
 		int[] result = new int[data.length];
 		

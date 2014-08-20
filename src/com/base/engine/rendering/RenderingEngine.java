@@ -28,29 +28,28 @@ import java.util.HashMap;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_VERSION;
-import static org.lwjgl.opengl.GL32.GL_DEPTH_CLAMP;
 
 public class RenderingEngine extends MappedValues
 {
-	private HashMap<String, Integer> samplerMap;
-	private ArrayList<BaseLight> lights;
-	private BaseLight activeLight;
+	private HashMap<String, Integer> m_samplerMap;
+	private ArrayList<BaseLight> m_lights;
+	private BaseLight m_activeLight;
 
-	private Shader forwardAmbient;
-	private Camera mainCamera;
+	private Shader m_forwardAmbient;
+	private Camera m_mainCamera;
 
 	public RenderingEngine()
 	{
 		super();
-		lights = new ArrayList<BaseLight>();
-		samplerMap = new HashMap<String, Integer>();
-		samplerMap.put("diffuse", 0);
-		samplerMap.put("normalMap", 1);
-		samplerMap.put("dispMap", 2);
+		m_lights = new ArrayList<BaseLight>();
+		m_samplerMap = new HashMap<String, Integer>();
+		m_samplerMap.put("diffuse", 0);
+		m_samplerMap.put("normalMap", 1);
+		m_samplerMap.put("dispMap", 2);
 
-		addVector3f("ambient", new Vector3f(0.1f, 0.1f, 0.1f));
+		AddVector3f("ambient", new Vector3f(0.1f, 0.1f, 0.1f));
 
-		forwardAmbient = new Shader("forward-ambient");
+		m_forwardAmbient = new Shader("forward-ambient");
 
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -65,27 +64,27 @@ public class RenderingEngine extends MappedValues
 		glEnable(GL_TEXTURE_2D);
 	}
 
-	public void updateUniformStruct(Transform transform, Material material, Shader shader, String uniformName, String uniformType)
+	public void UpdateUniformStruct(Transform transform, Material material, Shader shader, String uniformName, String uniformType)
 	{
 		throw new IllegalArgumentException(uniformType + " is not a supported type in RenderingEngine");
 	}
 
-	public void render(GameObject object)
+	public void Render(GameObject object)
 	{
-		if (getMainCamera() == null) System.err.println("Error! Main camera not found. This is very very big bug, and game will crash.");
+		if (GetMainCamera() == null) System.err.println("Error! Main camera not found. This is very very big bug, and game will crash.");
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		object.renderAll(forwardAmbient, this);
+		object.RenderAll(m_forwardAmbient, this);
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
 		glDepthMask(false);
 		glDepthFunc(GL_EQUAL);
 
-		for(BaseLight light : lights)
+		for(BaseLight light : m_lights)
 		{
-			activeLight = light;
-			object.renderAll(light.getShader(), this);
+			m_activeLight = light;
+			object.RenderAll(light.GetShader(), this);
 		}
 
 		glDepthFunc(GL_LESS);
@@ -93,38 +92,38 @@ public class RenderingEngine extends MappedValues
 		glDisable(GL_BLEND);
 	}
 
-	public static String getOpenGLVersion()
+	public static String GetOpenGLVersion()
 	{
 		return glGetString(GL_VERSION);
 	}
 
-	public void addLight(BaseLight light)
+	public void AddLight(BaseLight light)
 	{
-		lights.add(light);
+		m_lights.add(light);
 	}
 
-	public void addCamera(Camera camera)
+	public void AddCamera(Camera camera)
 	{
-		mainCamera = camera;
+		m_mainCamera = camera;
 	}
 
-	public int getSamplerSlot(String samplerName)
+	public int GetSamplerSlot(String samplerName)
 	{
-		return samplerMap.get(samplerName);
+		return m_samplerMap.get(samplerName);
 	}
 
-	public BaseLight getActiveLight()
+	public BaseLight GetActiveLight()
 	{
-		return activeLight;
+		return m_activeLight;
 	}
 
-	public Camera getMainCamera()
+	public Camera GetMainCamera()
 	{
-		return mainCamera;
+		return m_mainCamera;
 	}
 
-	public void setMainCamera(Camera mainCamera)
+	public void SetMainCamera(Camera mainCamera)
 	{
-		this.mainCamera = mainCamera;
+		this.m_mainCamera = mainCamera;
 	}
 }

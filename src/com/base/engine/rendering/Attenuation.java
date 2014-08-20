@@ -24,18 +24,18 @@ public class Attenuation extends Vector3f
 		super(constant, linear, exponent);
 	}
 
-	public float getConstant()
+	public float GetConstant()
 	{
-		return getX();
+		return GetX();
 	}
 
-	public float getLinear()
+	public float GetLinear()
 	{
-		return getY();
+		return GetY();
 	}
 
-	public float getExponent()
+	public float GetExponent()
 	{
-		return getZ();
+		return GetZ();
 	}
 }

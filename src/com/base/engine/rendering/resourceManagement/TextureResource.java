@@ -21,31 +21,31 @@ import static org.lwjgl.opengl.GL15.glDeleteBuffers;
 
 public class TextureResource
 {
-	private int id;
-	private int refCount;
+	private int m_id;
+	private int m_refCount;
 
 	public TextureResource()
 	{
-		this.id = glGenTextures();
-		this.refCount = 1;
+		this.m_id = glGenTextures();
+		this.m_refCount = 1;
 	}
 
 	@Override
 	protected void finalize()
 	{
-		glDeleteBuffers(id);
+		glDeleteBuffers(m_id);
 	}
 
-	public void addReference()
+	public void AddReference()
 	{
-		refCount++;
+		m_refCount++;
 	}
 
-	public boolean removeReference()
+	public boolean RemoveReference()
 	{
-		refCount--;
-		return refCount == 0;
+		m_refCount--;
+		return m_refCount == 0;
 	}
 
-	public int getId() { return id; }
+	public int GetId() { return m_id; }
 }

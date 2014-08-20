@@ -24,56 +24,47 @@ import static org.lwjgl.opengl.GL20.glCreateProgram;
 
 public class ShaderResource
 {
-	private int program;
-	private HashMap<String, Integer> uniforms;
-	private ArrayList<String> uniformNames;
-	private ArrayList<String> uniformTypes;
-	private int refCount;
+	private int                      m_program;
+	private HashMap<String, Integer> m_uniforms;
+	private ArrayList<String>        m_uniformNames;
+	private ArrayList<String>        m_uniformTypes;
+	private int                      m_refCount;
 
 	public ShaderResource()
 	{
-		this.program = glCreateProgram();
-		this.refCount = 1;
+		this.m_program = glCreateProgram();
+		this.m_refCount = 1;
 
-		if(program == 0)
+		if(m_program == 0)
 		{
 			System.err.println("Shader creation failed: Could not find valid memory location in constructor");
 			System.exit(1);
 		}
 
-		uniforms = new HashMap<String, Integer>();
-		uniformNames = new ArrayList<String>();
-		uniformTypes = new ArrayList<String>();
+		m_uniforms = new HashMap<String, Integer>();
+		m_uniformNames = new ArrayList<String>();
+		m_uniformTypes = new ArrayList<String>();
 	}
 
 	@Override
 	protected void finalize()
 	{
-		glDeleteBuffers(program);
+		glDeleteBuffers(m_program);
 	}
 
-	public void addReference()
+	public void AddReference()
 	{
-		refCount++;
+		m_refCount++;
 	}
 
-	public boolean removeReference()
+	public boolean RemoveReference()
 	{
-		refCount--;
-		return refCount == 0;
+		m_refCount--;
+		return m_refCount == 0;
 	}
 
-	public int getProgram() { return program; }
-
-	public HashMap<String, Integer> getUniforms() {
-		return uniforms;
-	}
-
-	public ArrayList<String> getUniformNames() {
-		return uniformNames;
-	}
-
-	public ArrayList<String> getUniformTypes() {
-		return uniformTypes;
-	}
+	public int GetProgram()                       { return m_program; }
+	public HashMap<String, Integer> GetUniforms() { return m_uniforms; }
+	public ArrayList<String> GetUniformNames()    { return m_uniformNames; }
+	public ArrayList<String> GetUniformTypes()    { return m_uniformTypes; }
 }

@@ -18,18 +18,26 @@ package com.base.engine.rendering.meshLoading;
 
 public class OBJIndex
 {
-	public int vertexIndex;
-	public int texCoordIndex;
-	public int normalIndex;
+	private int m_vertexIndex;
+	private int m_texCoordIndex;
+	private int m_normalIndex;
+
+	public int GetVertexIndex()   { return m_vertexIndex; }
+	public int GetTexCoordIndex() { return m_texCoordIndex; }
+	public int GetNormalIndex()   { return m_normalIndex; }
+
+	public void SetVertexIndex(int val)   { m_vertexIndex = val; }
+	public void SetTexCoordIndex(int val) { m_texCoordIndex = val; }
+	public void SetNormalIndex(int val)   { m_normalIndex = val; }
 
 	@Override
 	public boolean equals(Object obj)
 	{
 		OBJIndex index = (OBJIndex)obj;
 
-		return vertexIndex == index.vertexIndex
-				&& texCoordIndex == index.texCoordIndex
-				&& normalIndex == index.normalIndex;
+		return m_vertexIndex == index.m_vertexIndex
+				&& m_texCoordIndex == index.m_texCoordIndex
+				&& m_normalIndex == index.m_normalIndex;
 	}
 
 	@Override
@@ -40,9 +48,9 @@ public class OBJIndex
 
 		int result = BASE;
 
-		result = MULTIPLIER * result + vertexIndex;
-		result = MULTIPLIER * result + texCoordIndex;
-		result = MULTIPLIER * result + normalIndex;
+		result = MULTIPLIER * result + m_vertexIndex;
+		result = MULTIPLIER * result + m_texCoordIndex;
+		result = MULTIPLIER * result + m_normalIndex;
 
 		return result;
 	}

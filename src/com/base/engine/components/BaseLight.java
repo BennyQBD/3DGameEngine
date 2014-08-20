@@ -17,55 +17,54 @@
 package com.base.engine.components;
 
 import com.base.engine.core.CoreEngine;
-import com.base.engine.rendering.RenderingEngine;
 import com.base.engine.core.Vector3f;
 import com.base.engine.rendering.Shader;
 
 public class BaseLight extends GameComponent
 {
-	private Vector3f color;
-	private float intensity;
-	private Shader shader;
+	private Vector3f m_color;
+	private float    m_intensity;
+	private Shader   m_shader;
 	
 	public BaseLight(Vector3f color, float intensity)
 	{
-		this.color = color;
-		this.intensity = intensity;
+		this.m_color = color;
+		this.m_intensity = intensity;
 	}
 
 	@Override
-	public void addToEngine(CoreEngine engine)
+	public void AddToEngine(CoreEngine engine)
 	{
-		engine.getRenderingEngine().addLight(this);
+		engine.GetRenderingEngine().AddLight(this);
 	}
 
-	public void setShader(Shader shader)
+	public void SetShader(Shader shader)
 	{
-		this.shader = shader;
+		this.m_shader = shader;
 	}
 
-	public Shader getShader()
+	public Shader GetShader()
 	{
-		return shader;
+		return m_shader;
 	}
 
-	public Vector3f getColor()
+	public Vector3f GetColor()
 	{
-		return color;
+		return m_color;
 	}
 
-	public void setColor(Vector3f color)
+	public void SetColor(Vector3f color)
 	{
-		this.color = color;
+		this.m_color = color;
 	}
 
-	public float getIntensity()
+	public float GetIntensity()
 	{
-		return intensity;
+		return m_intensity;
 	}
 
-	public void setIntensity(float intensity)
+	public void SetIntensity(float intensity)
 	{
-		this.intensity = intensity;
+		this.m_intensity = intensity;
 	}
 }
