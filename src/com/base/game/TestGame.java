@@ -29,7 +29,7 @@ public class TestGame extends Game
 			new Texture("bricks_normal.jpg"), new Texture("bricks_disp.png"), 0.03f, -0.5f);
 
 		Material material = new Material(new Texture("bricks2.jpg"), 1, 8,
-				new Texture("bricks2_normal.jpg"), new Texture("bricks2_disp.jpg"), 0.04f, -1.0f);
+				new Texture("bricks2_normal.png"), new Texture("bricks2_disp.jpg"), 0.04f, -1.0f);
 
 		Mesh tempMesh = new Mesh("monkey3.obj");
 

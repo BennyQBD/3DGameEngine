@@ -51,7 +51,7 @@ public class FreeMove extends GameComponent
 		if(Input.GetKey(m_backKey))
 			Move(GetTransform().GetRot().GetForward(), -movAmt);
 		if(Input.GetKey(m_leftKey))
-			Move(GetTransform().GetRot().getLeft(), movAmt);
+			Move(GetTransform().GetRot().GetLeft(), movAmt);
 		if(Input.GetKey(m_rightKey))
 			Move(GetTransform().GetRot().GetRight(), movAmt);
 	}
