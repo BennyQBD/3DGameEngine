@@ -66,6 +66,8 @@ public class Shader
 
 			AddAllUniforms(vertexShaderText);
 			AddAllUniforms(fragmentShaderText);
+			
+			s_loadedShaders.put(fileName, m_resource);
 		}
 	}
 
