@@ -37,11 +37,13 @@ public class GameObject
 		m_engine = null;
 	}
 
-	public void AddChild(GameObject child)
+	public GameObject AddChild(GameObject child)
 	{
 		m_children.add(child);
 		child.SetEngine(m_engine);
 		child.GetTransform().SetParent(m_transform);
+		
+		return this;
 	}
 
 	public GameObject AddComponent(GameComponent component)
